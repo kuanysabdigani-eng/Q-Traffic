@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мониторинг пробок Алматы</title>
+    <!-- Подключаем стили Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        header {
+            height: 60px;
+            background-color: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            border-bottom: 1px solid #334155;
+        }
+        h1 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #38bdf8;
+        }
+        .status {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+        #map {
+            width: 100%;
+            height: calc(100vh - 60px);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Q-Traffic: Алматы</h1>
+        <div class="status">Карта дорожной ситуации в реальном времени</div>
+    </header>
+
+    <div id="map"></div>
+
+    <!-- Подключаем скрипт Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Инициализация карты с центром на Алматы
+        const map = L.map('map').setView([43.238293, 76.945465], 13);
+
+        // Используем стандартные тайлы OpenStreetMap (без ключей и ошибок)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Маркер центра города
+        L.marker([43.238293, 76.945465]).addTo(map)
+            .bindPopup('<b>Алматы Центр</b><br>Мониторинг активен.')
+            .openPopup();
+    </script>
+</body>
+</html>
